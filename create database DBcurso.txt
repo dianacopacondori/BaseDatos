@@ -1,0 +1,6 @@
+create database DBcurso
+use DBcurso
+create table clientes
+(
+id int 
+);
