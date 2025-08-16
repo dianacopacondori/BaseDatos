@@ -1,0 +1,9 @@
+create table Clientes(
+idcliente int,
+nombre varchar(20),
+apellido varchar(30),
+telefono numeric(10),
+direccion varchar(100),
+empresa char (20),
+importepedido decimal(18,2)
+);
