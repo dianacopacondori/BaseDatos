@@ -1,0 +1,13 @@
+insert into Clientes values(
+1,'Gabriel','Alba',958324533,'Calle n1','Empresa1',4180.009);
+
+insert into Clientes values (
+2, 'Mauricio','Iglesias',946755723,'Avenidad ST','Empresa2',1340.00);
+
+insert into Clientes values (
+3, 'Abel','Villanueva',927273659,'Calle n2','Empresa3',2300.00);
+
+insert into Clientes values(
+4, 'Leandra','Barrera',954678744,'Avenida LV','Empresa4',5200.00);
+
+select * from Clientes;
