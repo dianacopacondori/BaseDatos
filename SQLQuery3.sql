@@ -1,3 +1,4 @@
+
 create table Productos (
 idProducto int identity (1,1) not null PRIMARY KEY,
 nombre varchar (30),
@@ -13,5 +14,6 @@ create table Proveedor (
 idProveedor int not null PRIMARY KEY,
 nombre varchar (30),
 contacto numeric (10),
-dirección varchar (50),
-);
+dirección varchar (50),);
+
+# Primer commit con base de datos
