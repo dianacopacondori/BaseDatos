@@ -16,4 +16,13 @@ nombre varchar (30),
 contacto numeric (10),
 dirección varchar (50),);
 
-# Primer commit con base de datos
+create table Empleado (
+idEmpleado int identity (1,1) not null PRIMARY KEY,
+nombre varchar(15),
+cargo varchar(15),
+usuario varchar(15),
+contraseña numeric (5));
+
+create table Venta (
+idVenta int not null PRIMARY KEY,
+fecha date);
