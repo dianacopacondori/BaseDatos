@@ -47,12 +47,3 @@ subtotal money,
 CONSTRAINT FK_DetalleVenta_idVenta FOREIGN KEY (idVenta) REFERENCES Venta(idVenta),
 CONSTRAINT FK_DetalleVenta_idProducto FOREIGN KEY (idProducto) REFERENCES Productos(idProducto));
 
-insert into  Cliente (nombre, dni, telefono, direccion) values (
-'Maria', 28675676, 943987067, 'Calle n78');
-
-select * from Cliente;
-
-insert into Empleado values (
-'Javier', 'Cajero', 'javierCJ', '7600');
-
-select * from Empleado;
