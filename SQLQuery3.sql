@@ -47,3 +47,13 @@ subtotal money,
 CONSTRAINT FK_DetalleVenta_idVenta FOREIGN KEY (idVenta) REFERENCES Venta(idVenta),
 CONSTRAINT FK_DetalleVenta_idProducto FOREIGN KEY (idProducto) REFERENCES Productos(idProducto));
 
+insert into Cliente values (
+'Samuel', 29638765, 935253886, 'Av. manz1');
+select * from Cliente;
+
+insert into Empleado values (
+'Bruno', 'cajero', 'cjBruno', 36788);
+insert into Empleado values (
+'Camila', 'repositor', 'rpCamila', 40788);
+select * from Empleado;
+
