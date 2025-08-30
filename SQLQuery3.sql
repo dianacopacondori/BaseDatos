@@ -5,6 +5,8 @@ nombre varchar (30),
 contacto numeric (10),
 dirección varchar (50),);
 
+alter table Proveedor alter column contacto char (10);
+
 create table Productos (
 idProducto int identity (1,1) not null PRIMARY KEY,
 nombre varchar (30),
@@ -78,3 +80,30 @@ insert into Empleado values
 
 select cargo, usuario from Empleado;
 
+INSERT INTO Proveedor ( idProveedor,nombre, contacto, dirección) VALUES
+(1, 'Distribuidora Sol', 9876543210, 'Av. Los Olivos 123'),
+(2,'Importaciones Andes', 9123456789, 'Jr. Las Flores 456'),
+(3,'Tech Global SAC', 9567890123, 'Calle Lima 789'),
+(4,'AgroPerú S.A.', 9345678901, 'Av. Arequipa 351'),
+(5, 'Comercial Quispe', 9456789012, 'Jr. Cusco 624');
+select * from Proveedor;
+INSERT INTO Productos (nombre, precio, stock, categoria, idProveedor) VALUES
+('Laptop Lenovo', 2500.00, 15, 'Electrónica', 3),
+('Fertilizante Orgánico', 120.50, 40, 'Agricultura', 4),
+('Helado de Fresa', 5.90, 100, 'Alimentos', 1),
+('Cable HDMI', 18.75, 60, 'Electrónica', 3),
+('Arroz Integral', 3.50, 200, 'Alimentos', 2),
+('Mouse Inalámbrico', 45.00, 35, 'Electrónica', 3),
+('Semillas de Maíz', 25.00, 80, 'Agricultura', 4),
+('Galletas Quinoa', 6.20, 150, 'Alimentos', 5);
+select * from Productos;
+INSERT INTO Venta (fecha, idCliente, idEmpleado) VALUES
+('2025-08-01', 1, 4),  -- Samuel Ramirez atendido por Mateo
+('2025-08-02', 3, 8),  -- Carlos Mendoza atendido por Bruno
+('2025-08-03', 5, 2),  -- Jorge Salazar atendido por Diego
+('2025-08-04', 2, 1),  -- Ester Paredes atendida por Camila
+('2025-08-05', 6, 7),  -- Maria Quispe atendida por Javier
+('2025-08-06', 4, 5),  -- Ana Torres atendida por Sofia
+('2025-08-07', 7, 3),  -- Pedro Gutierrez atendido por Lucia
+('2025-08-08', 8, 6);  -- Sofia Chavez atendida por Valeria
+select * from Venta;
