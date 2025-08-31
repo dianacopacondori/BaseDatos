@@ -107,3 +107,13 @@ INSERT INTO Venta (fecha, idCliente, idEmpleado) VALUES
 ('2025-08-07', 7, 3),  -- Pedro Gutierrez atendido por Lucia
 ('2025-08-08', 8, 6);  -- Sofia Chavez atendida por Valeria
 select * from Venta;
+
+INSERT INTO DetalleVenta (idVenta, cantidad, precioUnitario, subtotal)
+VALUES 
+(1, 2, 25.50, 51.00),     -- Venta 1, Producto 101 (2 unidades a S/25.50)
+(1, 1, 40.00, 40.00),     -- Venta 1, Producto 102 (1 unidad a S/40.00)
+(2, 3, 15.00, 45.00),     -- Venta 2, Producto 103 (3 unidades a S/15.00)
+(3, 1, 25.50, 25.50),     -- Venta 3, Producto 101 (1 unidad a S/25.50)
+(3, 5, 10.00, 50.00);     -- Venta 3, Producto 104 (5 unidades a S/10.00)
+
+select * from DetalleVenta;
