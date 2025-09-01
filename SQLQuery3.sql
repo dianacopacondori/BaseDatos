@@ -86,7 +86,9 @@ INSERT INTO Proveedor ( idProveedor,nombre, contacto, dirección) VALUES
 (3,'Tech Global SAC', 9567890123, 'Calle Lima 789'),
 (4,'AgroPerú S.A.', 9345678901, 'Av. Arequipa 351'),
 (5, 'Comercial Quispe', 9456789012, 'Jr. Cusco 624');
+
 select * from Proveedor;
+
 INSERT INTO Productos (nombre, precio, stock, categoria, idProveedor) VALUES
 ('Laptop Lenovo', 2500.00, 15, 'Electrónica', 3),
 ('Fertilizante Orgánico', 120.50, 40, 'Agricultura', 4),
@@ -96,7 +98,9 @@ INSERT INTO Productos (nombre, precio, stock, categoria, idProveedor) VALUES
 ('Mouse Inalámbrico', 45.00, 35, 'Electrónica', 3),
 ('Semillas de Maíz', 25.00, 80, 'Agricultura', 4),
 ('Galletas Quinoa', 6.20, 150, 'Alimentos', 5);
+
 select * from Productos;
+
 INSERT INTO Venta (fecha, idCliente, idEmpleado) VALUES
 ('2025-08-01', 1, 4),  -- Samuel Ramirez atendido por Mateo
 ('2025-08-02', 3, 8),  -- Carlos Mendoza atendido por Bruno
@@ -106,14 +110,31 @@ INSERT INTO Venta (fecha, idCliente, idEmpleado) VALUES
 ('2025-08-06', 4, 5),  -- Ana Torres atendida por Sofia
 ('2025-08-07', 7, 3),  -- Pedro Gutierrez atendido por Lucia
 ('2025-08-08', 8, 6);  -- Sofia Chavez atendida por Valeria
+
 select * from Venta;
 
-INSERT INTO DetalleVenta (idVenta, cantidad, precioUnitario, subtotal)
+INSERT INTO DetalleVenta (idVenta, idProducto, cantidad, precioUnitario, subtotal)
 VALUES 
-(1, 2, 25.50, 51.00),     -- Venta 1, Producto 101 (2 unidades a S/25.50)
-(1, 1, 40.00, 40.00),     -- Venta 1, Producto 102 (1 unidad a S/40.00)
-(2, 3, 15.00, 45.00),     -- Venta 2, Producto 103 (3 unidades a S/15.00)
-(3, 1, 25.50, 25.50),     -- Venta 3, Producto 101 (1 unidad a S/25.50)
-(3, 5, 10.00, 50.00);     -- Venta 3, Producto 104 (5 unidades a S/10.00)
+(1, 3,  2, 25.50, 51.00),     -- Venta 1, Producto 101 (2 unidades a S/25.50)
+(1, 1,  1, 40.00, 40.00),     -- Venta 1, Producto 102 (1 unidad a S/40.00)
+(2, 7 , 3, 15.00, 45.00),     -- Venta 2, Producto 103 (3 unidades a S/15.00)
+(3, 5 , 1, 25.50, 25.50),     -- Venta 3, Producto 101 (1 unidad a S/25.50)
+(3, 8,  5, 10.00, 50.00);     -- Venta 3, Producto 104 (5 unidades a S/10.00)
 
 select * from DetalleVenta;
+
+SELECT 
+    V.fecha,
+    E.nombre AS nombreEmpleado,
+    E.cargo
+FROM Venta V
+INNER JOIN Empleado E ON V.idEmpleado = E.idEmpleado;
+
+SELECT 
+    V.fecha,
+    C.nombre AS nombreCliente,
+    E.nombre AS nombreEmpleado,
+    E.cargo
+FROM Venta V
+INNER JOIN Cliente C ON V.idCliente = C.idCliente
+INNER JOIN Empleado E ON V.idEmpleado = E.idEmpleado;
