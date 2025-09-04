@@ -207,3 +207,40 @@ SELECT
 FROM Venta V
 INNER JOIN Cliente C ON V.idCliente = C.idCliente
 INNER JOIN Empleado E ON V.idEmpleado = E.idEmpleado;
+
+SELECT * FROM Venta 
+WHERE fecha is null;
+
+SELECT * FROM Cliente 
+WHERE nombre LIKE'A%';
+
+SELECT * FROM Productos
+WHERE idProveedor IN ( 1, 3, 5);
+
+SELECT * FROM DetalleVenta 
+WHERE subtotal BETWEEN 30 AND 100; 
+
+SELECT * FROM DetalleVenta 
+WHERE subtotal > 100 OR subtotal is null ; 
+
+SELECT idEmpleado, COUNT(*) AS ventasEmpleados
+FROM Venta
+GROUP BY idEmpleado;
+
+SELECT categoria, AVG(stock) AS promediostock
+FROM Productos
+GROUP BY categoria;
+
+SELECT categoria, AVG(precio) AS precioPromedio
+FROM Productos
+GROUP BY categoria
+HAVING AVG(precio) > 100;
+
+SELECT nombre,
+       stock,
+       CASE 
+         WHEN stock <= 10 THEN 'Stock Crítico'
+         ELSE 'Stock Suficiente'
+       END AS estadoStock
+FROM Productos;
+
