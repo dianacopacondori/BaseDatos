@@ -2,6 +2,76 @@
 ** Copyright Microsoft, Inc. 1994 - 2000
 ** All Rights Reserved.
 */
+SELECT * FROM Customers;
+SELECT * FROM Employees;
+
+SELECT ProductName, UnitPrice, UnitsInStock
+FROM Products;
+
+SELECT CompanyName, ContactName
+FROM Customers
+WHERE Country = 'Mexico';
+
+SELECT CategoryID, AVG(UnitPrice) AS PrecioPromedio
+FROM Products
+GROUP BY CategoryID;
+
+SELECT CustomerID, COUNT(*) AS TotalPedidos
+FROM Orders
+GROUP BY CustomerID;
+
+SELECT CustomerID, COUNT(*) AS Cantidad
+FROM Orders
+GROUP BY CustomerID
+HAVING COUNT(*) > 5;
+
+SELECT ProductName, UnitPrice,
+       CASE 
+         WHEN UnitPrice < 20 THEN 'Barato'
+         WHEN UnitPrice < 50 THEN 'Medio'
+         ELSE 'Caro'
+       END AS RangoPrecio
+FROM Products;
+
+SELECT CompanyName, Country
+FROM Customers
+WHERE Country IN ('Mexico', 'Germany', 'Brazil');
+
+SELECT ProductID, ProductName, UnitPrice
+FROM Products
+WHERE ProductID IN (1, 3, 5);
+
+SELECT ProductName, UnitPrice
+FROM Products
+WHERE UnitPrice BETWEEN 10 AND 30;
+
+-- Órdenes entre el 1 de enero y el 31 de marzo de 1997
+SELECT OrderID, OrderDate, CustomerID
+FROM Orders
+WHERE OrderDate BETWEEN '1997-01-01' AND '1997-03-31';
+
+SELECT ProductName, CategoryID
+FROM Products
+WHERE CategoryID NOT IN (1, 2, 3);
+
+SELECT o.OrderID,
+       o.OrderDate,
+       c.CompanyName AS Cliente,
+       c.Country
+FROM Orders AS o
+INNER JOIN Customers AS c
+       ON o.CustomerID = c.CustomerID;
+
+SELECT o.OrderID,
+       c.CompanyName AS Cliente,
+       e.FirstName + ' ' + e.LastName AS Empleado,
+       o.OrderDate
+FROM Orders AS o
+INNER JOIN Customers AS c
+       ON o.CustomerID = c.CustomerID
+INNER JOIN Employees AS e
+       ON o.EmployeeID = e.EmployeeID;
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
@@ -9349,33 +9419,3 @@ ALTER TABLE EmployeeTerritories
 	)
 GO
 
-SELECT * FROM Customers;
-SELECT * FROM Employees;
-
-SELECT ProductName, UnitPrice, UnitsInStock
-FROM Products;
-
-SELECT CompanyName, ContactName
-FROM Customers
-WHERE Country = 'Mexico';
-
-SELECT CategoryID, AVG(UnitPrice) AS PrecioPromedio
-FROM Products
-GROUP BY CategoryID;
-
-SELECT CustomerID, COUNT(*) AS TotalPedidos
-FROM Orders
-GROUP BY CustomerID;
-
-SELECT CustomerID, COUNT(*) AS Cantidad
-FROM Orders
-GROUP BY CustomerID
-HAVING COUNT(*) > 5;
-
-SELECT ProductName, UnitPrice,
-       CASE 
-         WHEN UnitPrice < 20 THEN 'Barato'
-         WHEN UnitPrice < 50 THEN 'Medio'
-         ELSE 'Caro'
-       END AS RangoPrecio
-FROM Products;
