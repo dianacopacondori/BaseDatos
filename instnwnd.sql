@@ -73,6 +73,20 @@ INNER JOIN Employees AS e
        ON o.EmployeeID = e.EmployeeID;
 
 
+--Empleados contratados hasta el 1 de enero de 1993.
+SELECT EmployeeID, LastName, HireDate
+FROM Employees
+WHERE HireDate <= '1993-01-01';
+
+--Clientes que tienen ordenes
+SELECT c.CustomerID, c.CompanyName
+FROM Customers c
+WHERE EXISTS (
+    SELECT 1
+    FROM Orders o
+    WHERE o.CustomerID = c.CustomerID
+);
+
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
 -- Default schema is dbo.
