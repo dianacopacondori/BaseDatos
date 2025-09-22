@@ -78,6 +78,11 @@ SELECT EmployeeID, LastName, HireDate
 FROM Employees
 WHERE HireDate <= '1993-01-01';
 
+SELECT ProductName, CategoryID
+FROM Products
+WHERE CategoryID <> 1;
+
+
 --Clientes que tienen ordenes
 SELECT c.CustomerID, c.CompanyName
 FROM Customers c
@@ -86,6 +91,52 @@ WHERE EXISTS (
     FROM Orders o
     WHERE o.CustomerID = c.CustomerID
 );
+
+SELECT ProductName
+FROM Products
+WHERE SupplierID IN (
+    SELECT SupplierID
+    FROM Suppliers
+    WHERE Country = 'USA'
+);
+
+SELECT c.CustomerID, c.CompanyName, o.OrderID, o.OrderDate
+FROM Customers c
+LEFT JOIN Orders o
+       ON c.CustomerID = o.CustomerID
+ORDER BY c.CustomerID;
+
+SELECT c.CategoryID, c.CategoryName, p.ProductName
+FROM Categories c
+LEFT JOIN Products p
+       ON c.CategoryID = p.CategoryID
+ORDER BY c.CategoryID;
+
+SELECT p.ProductName, c.CategoryName
+FROM Products p
+RIGHT JOIN Categories c
+       ON p.CategoryID = c.CategoryID;
+
+SELECT c.CustomerID, c.CompanyName, o.OrderID, o.OrderDate
+FROM Customers c
+FULL JOIN Orders o
+       ON c.CustomerID = o.CustomerID
+ORDER BY c.CustomerID;
+
+SELECT c.CompanyName AS Cliente, e.FirstName + ' ' + e.LastName AS Empleado
+FROM Customers c
+CROSS JOIN Employees e;
+
+SELECT OrderID, OrderDate, '1996' AS Año
+FROM Orders
+WHERE YEAR(OrderDate) = 1996
+
+UNION
+
+SELECT OrderID, OrderDate, '1997' AS Año
+FROM Orders
+WHERE YEAR(OrderDate) = 1997;
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
