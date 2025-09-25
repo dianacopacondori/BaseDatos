@@ -1,0 +1,34 @@
+Uso de INSERT, DELETE, UPDATE y PIVOT en SQL Server
+1. INSERT
+La instrucción INSERT se utiliza para agregar nuevos registros a una tabla.
+Sintaxis básica:
+	INSERT INTO tabla (columna1, columna2, …)
+	VALUES (valor1, valor2, …);
+
+También se puede usar con una consulta (INSERT INTO ... SELECT) para insertar resultados de una consulta en otra tabla.
+
+2. DELETE
+La instrucción DELETE elimina filas de una tabla. Siempre debe usarse con precaución, preferiblemente con una cláusula WHERE para evitar eliminar todos los registros.
+Sintaxis básica:
+	DELETE FROM tabla
+	WHERE condición;
+3. UPDATE
+La instrucción UPDATE modifica los valores existentes en una o más filas de una tabla. Al igual que con DELETE, es fundamental usar una cláusula WHERE para especificar qué filas actualizar.
+Sintaxis básica:
+	UPDATE tabla
+	SET columna1 = valor1, columna2 = valor2, …
+	WHERE condición;
+
+4. Operación PIVOT
+PIVOT transforma filas en columnas, permitiendo presentar datos de forma cruzada (tablas dinámicas). Es útil para resumir información y cambiar la orientación de los datos.
+Sintaxis básica:
+	SELECT *
+	FROM (
+    	SELECT categoría, valor, mes
+   	 FROM ventas
+	) AS origen
+	PIVOT (
+    	SUM(valor)
+    	FOR mes IN ([Enero], [Febrero], [Marzo])
+	) AS pivote;
+Requiere especificar una función de agregación y las columnas que se convertirán en encabezados.
