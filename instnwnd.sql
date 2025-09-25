@@ -127,6 +127,10 @@ SELECT c.CompanyName AS Cliente, e.FirstName + ' ' + e.LastName AS Empleado
 FROM Customers c
 CROSS JOIN Employees e;
 
+SELECT DISTINCT e.EmployeeID, d.DayNumber
+FROM Employees e
+CROSS JOIN (SELECT 1 AS DayNumber UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) d;
+
 SELECT OrderID, OrderDate, '1996' AS Año
 FROM Orders
 WHERE YEAR(OrderDate) = 1996
@@ -136,6 +140,17 @@ UNION
 SELECT OrderID, OrderDate, '1997' AS Año
 FROM Orders
 WHERE YEAR(OrderDate) = 1997;
+
+SELECT ProductName, UnitPrice, 'Barato' AS Rango
+FROM Products
+WHERE UnitPrice < 10
+
+UNION
+
+SELECT ProductName, UnitPrice, 'Caro' AS Rango
+FROM Products
+WHERE UnitPrice > 100;
+
 
 
 -- This script does not create a database.
