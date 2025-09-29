@@ -151,7 +151,25 @@ SELECT ProductName, UnitPrice, 'Caro' AS Rango
 FROM Products
 WHERE UnitPrice > 100;
 
+UPDATE Products
+SET UnitPrice = 27.00
+WHERE ProductID = 1;
+Select * from Products;
 
+SELECT EmployeeID, YEAR(OrderDate) AS Año, COUNT(OrderID) AS TotalPedidos
+FROM Orders
+GROUP BY EmployeeID, YEAR(OrderDate)
+ORDER BY EmployeeID, Año;
+
+SELECT EmployeeID, [1996], [1997], [1998]
+FROM (
+    SELECT EmployeeID, YEAR(OrderDate) AS Año, OrderID
+    FROM Orders
+) AS Fuente
+PIVOT (
+    COUNT(OrderID) FOR Año IN ([1996],[1997],[1998])
+) AS pvt
+ORDER BY EmployeeID;
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
