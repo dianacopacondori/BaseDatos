@@ -1,0 +1,60 @@
+Resumen: Procedimientos almacenados con transacciones
+
+Un procedimiento almacenado en SQL Server es un conjunto de instrucciones SQL precompiladas y almacenadas en la base de datos, 
+que se pueden ejecutar de forma repetida. Cuando se combinan con transacciones, permiten garantizar la integridad y consistencia
+de los datos durante operaciones complejas o múltiples.
+
+Objetivo principal
+Asegurar que todas las operaciones dentro del procedimiento se completen con éxito (commit) o, si ocurre un error, 
+que se reviertan completamente (rollback), manteniendo la base de datos en un estado consistente.
+
+Estructura de la transacción 
+
+CREATE PROCEDURE NombreProcedimiento
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Operaciones DML (INSERT, UPDATE, DELETE, etc.)
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        -- Opcional: registrar el error o lanzarlo
+        THROW;
+    END CATCH
+END
+
+Elementos clave
+
+- `BEGIN TRANSACTION`: Inicia una transacción explícita.
+- `COMMIT TRANSACTION`: Confirma y guarda los cambios si todo es correcto.
+- `ROLLBACK TRANSACTION`: Deshace todos los cambios si ocurre un error.
+- `TRY...CATCH`: Bloque para manejar errores de forma controlada.
+- `@@TRANCOUNT`: Función que indica cuántas transacciones activas hay; útil para evitar errores al hacer rollback.
+- `SET XACT_ABORT ON` (opcional): Hace que SQL Server revierta automáticamente la transacción ante errores graves.
+
+Ventajas
+
+- Integridad de datos: Se evitan estados intermedios inconsistentes.
+- Control de errores: Permite gestionar fallos de forma segura.
+- Rendimiento: Al ejecutarse en el servidor, reducen el tráfico de red y aprovechan la compilación previa.
+- Reutilización: El procedimiento puede llamarse desde múltiples aplicaciones o procesos.
+
+Buenas prácticas
+
+1. Siempre usar bloques `TRY...CATCH` para manejar errores.
+2. Verificar `@@TRANCOUNT` antes de hacer `ROLLBACK`.
+3. Mantener las transacciones lo más cortas posible para minimizar bloqueos.
+4. Evitar lógica de negocio compleja o llamadas externas dentro de la transacción.
+5. Considerar el uso de `SET XACT_ABORT ON` en operaciones críticas.
+
+Conclusión:
+Los procedimientos almacenados con transacciones son una herramienta poderosa en SQL Server para implementar 
+operaciones seguras, atómicas y confiables, esenciales en sistemas que requieren alta integridad de datos, 
+como aplicaciones financieras o de gestión empresarial.
