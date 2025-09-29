@@ -171,6 +171,13 @@ PIVOT (
 ) AS pvt
 ORDER BY EmployeeID;
 
+INSERT INTO Customers (CustomerID, CompanyName, ContactName, City, Country, Phone)
+VALUES ('CUST9', 'Innova Tech SAC', 'Diana Ramirez', 'Arequipa', 'Peru', '987654321');
+
+DELETE FROM Customers
+WHERE CustomerID = 'CUST9';
+select * from Customers;
+
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
 -- Default schema is dbo.
