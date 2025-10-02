@@ -244,3 +244,57 @@ SELECT nombre,
        END AS estadoStock
 FROM Productos;
 
+CREATE PROCEDURE sp_RegistrarVenta
+    @idCliente INT,
+    @idEmpleado INT,
+    @fecha DATE,
+    @idProducto INT,
+    @cantidad INT
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- 1. Insertar la venta
+        INSERT INTO Venta (fecha, idCliente, idEmpleado)
+        VALUES (@fecha, @idCliente, @idEmpleado);
+
+        -- Obtener el ID de la venta recién creada
+        DECLARE @idVenta INT = SCOPE_IDENTITY();
+
+        -- 2. Obtener el precio actual del producto
+        DECLARE @precioUnitario DECIMAL(10,2);
+
+        SELECT @precioUnitario = precio
+        FROM Productos
+        WHERE idProducto = @idProducto;
+
+        -- 3. Insertar detalle de venta
+        INSERT INTO DetalleVenta (idVenta, idProducto, cantidad, precioUnitario, subtotal)
+        VALUES (@idVenta, @idProducto, @cantidad, @precioUnitario, @cantidad * @precioUnitario);
+
+        -- 4. Actualizar stock
+        UPDATE Productos
+        SET stock = stock - @cantidad
+        WHERE idProducto = @idProducto;
+
+        -- Confirmar todo
+        COMMIT TRANSACTION;
+    END TRY
+
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+
+        PRINT 'Error en la transacción: ' + ERROR_MESSAGE();
+    END CATCH
+END;
+
+select * from Venta;
+select * from DetalleVenta;
+
+EXEC sp_RegistrarVenta 
+    @idCliente = 3,
+    @idEmpleado = 8,
+    @fecha = '2025-09-30',
+    @idProducto = 2,
+    @cantidad = 3;
