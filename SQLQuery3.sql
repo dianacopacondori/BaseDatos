@@ -278,7 +278,7 @@ BEGIN
         SET stock = stock - @cantidad
         WHERE idProducto = @idProducto;
 
-        -- Confirmar todo
+        -- Confirmar
         COMMIT TRANSACTION;
     END TRY
 
