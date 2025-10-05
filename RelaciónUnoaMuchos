@@ -1,0 +1,14 @@
+Relación de uno a muchos (1:N) es un tipo de relación entre dos tablas donde 
+un registro en la tabla "uno" puede estar asociado a múltiples registros en la tabla "muchos",
+pero cada registro en la tabla "muchos" solo puede estar asociado a un registro en la tabla "uno".
+
+ Ejemplo clásico:
+- Tabla `clientes` (uno)
+- Tabla `pedidos` (muchos)
+
+Un cliente puede realizar muchos pedidos, pero cada pedido pertenece a un solo cliente.
+
+Reglas importantes:
+- La tabla "muchos" debe contener una columna que haga referencia a la clave primaria de la tabla "uno".
+- La clave foránea no puede tener valores que no existan en la tabla referenciada (a menos que sea `NULL`,
+si se permite).
