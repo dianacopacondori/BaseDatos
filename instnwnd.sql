@@ -191,6 +191,8 @@ BEGIN
 
     RETURN ISNULL(@Total, 0);
 END;
+GO
+
 
 SELECT CustomerID, dbo.fn_TotalVentasCliente(CustomerID) AS TotalVentas
 FROM Customers
