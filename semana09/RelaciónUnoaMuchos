@@ -1,0 +1,25 @@
+En MySQL, una **relación de uno a muchos (1:N)** es un tipo de relación entre dos tablas donde
+un registro en la tabla "uno" puede estar asociado a múltiples registros en la tabla "muchos", 
+pero cada registro en la tabla "muchos" está asociado a solo un registro en la tabla "uno".
+
+### Características principales:
+
+1. **Clave foránea (Foreign Key):**  
+   - La tabla del lado "muchos" contiene una clave foránea que hace referencia a la clave primaria
+    de la tabla del lado "uno".
+   - Esta clave foránea garantiza la integridad referencial entre ambas tablas.
+
+2. **Ejemplo clásico:**  
+   - **Tabla `clientes` (uno)** → **Tabla `pedidos` (muchos)**  
+     Un cliente puede realizar muchos pedidos, pero cada pedido pertenece a un solo cliente
+``
+
+3. **Consulta con JOIN:**  
+   Para obtener datos relacionados, se usa una cláusula `JOIN`:
+   Resumen visual:
+- **Tabla A (uno):** 1 registro → **Tabla B (muchos):** N registros.
+- **Tabla B** tiene una columna que apunta a la clave primaria de **Tabla A**.
+- Es el tipo de relación más común en bases de datos relacionales.
+
+Esta estructura permite organizar los datos de forma eficiente, evitar redundancias y mantener
+la coherencia de la información.
