@@ -1,0 +1,11 @@
+En MySQL Server, una relación de muchos a muchos (o N:M) se implementa mediante una tabla intermedia 
+(también llamada tabla de unión, tabla pivote o tabla de asociación). Esta tabla contiene las claves 
+foráneas que referencian las claves primarias de las dos tablas que se relacionan.
+
+📌 Ejemplo: Estudiantes y Cursos
+Supongamos que:
+
+Un estudiante puede inscribirse en muchos cursos.
+Un curso puede tener muchos estudiantes.
+
+Esto es una relación muchos a muchos.
