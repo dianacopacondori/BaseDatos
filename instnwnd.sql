@@ -25,6 +25,17 @@ FROM Orders
 GROUP BY CustomerID
 HAVING COUNT(*) > 5;
 
+CREATE FUNCTION fn_PedidosPorEmpleado (@EmployeeID INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT o.OrderID, o.OrderDate, c.CompanyName AS Cliente, o.ShipCountry
+    FROM Orders o
+    INNER JOIN Customers c ON o.CustomerID = c.CustomerID
+    WHERE o.EmployeeID = @EmployeeID
+);
+
 SELECT ProductName, UnitPrice,
        CASE 
          WHEN UnitPrice < 20 THEN 'Barato'
