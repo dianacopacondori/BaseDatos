@@ -1,0 +1,20 @@
+Las funciones agregadas en SQL Server son funciones que realizan un 
+cálculo sobre un conjunto de valores y devuelven un único valor resumen. 
+Se utilizan comúnmente con la cláusula `GROUP BY` para agrupar filas y
+calcular métricas por grupo, aunque también pueden aplicarse a toda la 
+tabla si no se usa `GROUP BY`.
+
+Funciones Agregadas Básicas
+
+COUNT(*): Cuenta el número total de filas (incluyendo nulos). 
+COUNT(columna): Cuenta el número de filas, no nulas, en una columna específica. 
+SUM(columna): Calcula la suma de los valores numéricos de una columna. 
+AVG(columna): Calcula el promedio (media aritmética) de los valores numéricos de una columna. 
+MIN(columna): Devuelve el valor mínimo en una columna (numérico, fecha, cadena, etc.). 
+MAX(columna): Devuelve el valor máximo en una columna.
+
+Notas Importantes
+
+- Ignoran valores `NULL`: La mayoría de las funciones agregadas (excepto `COUNT(*)`) ignoran los valores `NULL` en sus cálculos.
+- Se combinan con `GROUP BY`: Para calcular agregados por grupo (por ejemplo, ventas por región).
+- No se pueden usar en cláusulas `WHERE`: Se deben usar en `HAVING` cuando se filtran resultados agregados.
