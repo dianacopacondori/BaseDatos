@@ -12,6 +12,9 @@ SUM(columna): Calcula la suma de los valores numéricos de una columna.
 AVG(columna): Calcula el promedio (media aritmética) de los valores numéricos de una columna. 
 MIN(columna): Devuelve el valor mínimo en una columna (numérico, fecha, cadena, etc.). 
 MAX(columna): Devuelve el valor máximo en una columna.
+GROUP BY(): Agrupa filas que tienen el mismo valor en columnas específicas. Se usa para obtener resúmenes de datos por grupo.
+HAVING(): Filtra los resultados después de haber sido agrupados por GROUP BY. Es similar a WHERE,
+pero se usa con funciones agregadas.
 
 Notas Importantes
 
