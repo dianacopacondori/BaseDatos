@@ -12,6 +12,17 @@ SELECT CompanyName, ContactName
 FROM Customers
 WHERE Country = 'Mexico';
 
+--SUM()
+SELECT SUM(Quantity) AS Total_Unidades_Vendidas
+FROM [Order Details];
+
+SELECT 
+    ProductID,
+    SUM(UnitPrice * Quantity) AS Total_Ventas_Producto
+FROM [Order Details]
+GROUP BY ProductID
+ORDER BY Total_Ventas_Producto DESC;
+
 SELECT CategoryID, AVG(UnitPrice) AS PrecioPromedio
 FROM Products
 GROUP BY CategoryID;
@@ -24,6 +35,37 @@ SELECT CustomerID, COUNT(*) AS Cantidad
 FROM Orders
 GROUP BY CustomerID
 HAVING COUNT(*) > 5;
+
+SELECT ProductID,
+    AVG(Quantity) AS Promedio_Unidades_Vendidas
+FROM [Order Details]
+GROUP BY ProductID
+ORDER BY Promedio_Unidades_Vendidas DESC;
+
+SELECT CategoryID,
+    MIN(UnitPrice) AS Precio_Minimo,
+    MAX(UnitPrice) AS Precio_Maximo
+FROM Products
+GROUP BY CategoryID
+ORDER BY CategoryID;
+
+SELECT 
+    YEAR(o.OrderDate) AS Año,
+    AVG(od.UnitPrice * od.Quantity) AS Promedio_Ventas_Anuales
+FROM Orders o
+JOIN [Order Details] od ON o.OrderID = od.OrderID
+GROUP BY YEAR(o.OrderDate)
+ORDER BY Año;
+
+SELECT 
+    CategoryID,
+    MIN(UnitPrice) AS Precio_Minimo,
+    MAX(UnitPrice) AS Precio_Maximo,
+    AVG(UnitPrice) AS Precio_Promedio
+FROM Products
+GROUP BY CategoryID;
+
+
 
 CREATE FUNCTION fn_PedidosPorEmpleado (@EmployeeID INT)
 RETURNS TABLE
