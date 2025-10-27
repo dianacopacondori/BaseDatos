@@ -251,6 +251,20 @@ SELECT CustomerID, dbo.fn_TotalVentasCliente(CustomerID) AS TotalVentas
 FROM Customers
 ORDER BY TotalVentas DESC;
 
+SELECT 
+    (SELECT TOP 1 ProductName FROM Products ORDER BY UnitPrice ASC) AS Producto_Mas_Barato,
+    (SELECT TOP 1 ProductName FROM Products ORDER BY UnitPrice DESC) AS Producto_Mas_Caro;
+
+	SELECT 
+    e.EmployeeID,
+    e.FirstName + ' ' + e.LastName AS Empleado,
+    MIN(o.OrderDate) AS Primer_Pedido,
+    MAX(o.OrderDate) AS Ultimo_Pedido
+FROM Employees e
+JOIN Orders o ON e.EmployeeID = o.EmployeeID
+GROUP BY e.EmployeeID, e.FirstName, e.LastName
+ORDER BY Primer_Pedido;
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
