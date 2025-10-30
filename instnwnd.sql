@@ -265,6 +265,70 @@ JOIN Orders o ON e.EmployeeID = o.EmployeeID
 GROUP BY e.EmployeeID, e.FirstName, e.LastName
 ORDER BY Primer_Pedido;
 
+SELECT GETDATE() AS Fecha_Actual;
+
+SELECT 
+    OrderID,
+    OrderDate,
+    YEAR(OrderDate) AS Año,
+    MONTH(OrderDate) AS Mes,
+    DAY(OrderDate) AS Día
+FROM Orders;
+
+SELECT 
+    OrderID,
+    OrderDate,
+    ShippedDate,
+    DATEDIFF(DAY, OrderDate, ShippedDate) AS Dias_Entrega
+FROM Orders
+WHERE ShippedDate IS NOT NULL;
+
+SELECT 
+    OrderID,
+    OrderDate,
+    DATEADD(DAY, 7, OrderDate) AS Fecha_Estimada_Entrega
+FROM Orders;
+
+SELECT 
+    CONCAT(ContactName, ' - ', Country) AS Cliente_Pais
+FROM Customers;
+
+--Muestra solo los clientes cuyo nombre tenga más de 12 caracteres
+SELECT 
+    ContactName
+FROM Customers
+WHERE LEN(ContactName) > 12;
+
+--Mostrar solo los últimos 4 dígitos del teléfono
+SELECT 
+    CompanyName,
+    Phone,
+    SUBSTRING(Phone, LEN(Phone) - 3, 4) AS Ultimos4
+FROM Customers;
+
+
+SELECT 
+    FirstName,
+    LastName,
+    UPPER(FirstName + ' ' + LastName) AS NombreCompleto_MAY,
+    LOWER(FirstName + ' ' + LastName) AS NombreCompleto_min
+FROM Employees;
+
+SELECT 
+    LTRIM(RTRIM('     Producto Nuevo       ')) AS TextoLimpio;
+
+--Convierte el precio (UnitPrice) a tipo VARCHAR para concatenarlo con otro texto.
+SELECT 
+    ProductName,
+    'Precio: S/ ' + CAST(UnitPrice AS VARCHAR(10)) AS Precio_Texto
+FROM Products;
+
+--Convertir fecha a texto con formato
+SELECT 
+    OrderID,
+    CONVERT(VARCHAR(10), OrderDate, 103) AS Fecha_Formato_DDMMYYYY
+FROM Orders;
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
