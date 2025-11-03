@@ -1,0 +1,34 @@
+FUNCIONES 
+Bloques de código reutilizables que devuelven un valor.
+
+PROCEDIMIENTOS ALMACENADOS
+Los procedimientos almacenados son similares a las funciones,
+pero no necesariamente devuelven un valor. Se utilizan para
+ejecutar una serie de comandos SQL.
+
+MANEJO DE VARIABLES 
+- Declaración: Se usan con `DECLARE`
+  DECLARE @MiVariable INT;
+- Asignación:
+  - Con `SET`: `SET @MiVariable = 10;`
+  - Con `SELECT`: `SELECT @MiVariable = COUNT(*) FROM Tabla;`
+
+ESTRUCTURA CONDICIONAL `IF...ELSE`
+
+- Permite ejecutar bloques de código según una condición lógica.
+- Sintaxis:
+  sql
+  IF condición
+      instrucción_o_bloque
+  ELSE
+      instrucción_o_bloque
+
+PROGRAMACIÓN DE CURSORES
+Estructuras que permiten recorrer fila por fila un conjunto de resultados.
+- Pasos básicos:
+  1. Declarar: `DECLARE cursor_name CURSOR FOR SELECT...`
+  2. Abrir: `OPEN cursor_name`
+  3. Leer: `FETCH NEXT FROM cursor_name INTO @variables`
+  4. Procesar: en un bucle (generalmente `WHILE @@FETCH_STATUS = 0`)
+  5. Cerrar: `CLOSE cursor_name`
+  6. Liberar: `DEALLOCATE cursor_name`
