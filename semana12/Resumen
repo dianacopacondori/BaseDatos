@@ -1,42 +1,44 @@
-IN
+SUBCONSULTAS
+Las subconsultas son consultas anidadas dentro de otra consulta. Existen dos tipos principales de subconsultas:
+-IN
 Se usa para verificar si un valor está dentro de un conjunto de resultados de otra consulta.
 
-EXISTS
+-EXISTS
 Verifica si una subconsulta devuelve al menos una fila.
 Suele ser más eficiente que IN cuando se trabaja con grandes volúmenes.
 
-Funciones de Fecha
+-FUNCIONES DE FECHA
 DAY(fecha), MONTH(fecha), YEAR(fecha)
 Extraen el día, mes o año de una fecha.
 
-GETDATE()
+-GETDATE()
 Devuelve la fecha y hora actual del sistema (SQL Server). 
 
-DATEADD(intervalo, número, fecha)
+-DATEADD(intervalo, número, fecha)
 Añade un intervalo de tiempo a una fecha.
 
-DATEDIFF(intervalo, fecha1, fecha2)
+-DATEDIFF(intervalo, fecha1, fecha2)
 Calcula la diferencia entre dos fechas en la unidad especificada.
 
-Funciones de Cadena
-CONCAT(cadena1, cadena2, ...)
+FUNCIONES DE CADENA
+-CONCAT(cadena1, cadena2, ...)
 Concatena dos o más cadenas.
 
-LEN(cadena) (SQL Server) / LENGTH(cadena) (otros)
+-LEN(cadena) (SQL Server) / LENGTH(cadena) (otros)
 Devuelve la longitud de una cadena.
 
-SUBSTRING(cadena, inicio, longitud)
+-SUBSTRING(cadena, inicio, longitud)
 Extrae una parte de la cadena.
 
-LOWER(cadena), UPPER(cadena)
+-LOWER(cadena), UPPER(cadena)
 Convierte a minúsculas o mayúsculas.
 
-LTRIM(cadena), RTRIM(cadena)
+-LTRIM(cadena), RTRIM(cadena)
 Eliminan espacios en blanco a la izquierda o derecha.
 
-Funciones de Conversión
-CAST(expresión AS tipo)
+FUNCIONES DE CONVERSION
+-CAST(expresión AS tipo)
 Convierte un valor a otro tipo de datos. 
 
-CONVERT(tipo, expresión [, estilo])
-Específico de SQL Server. Permite formatear fechas con un "estilo".
+-CONVERT(tipo, expresión [, estilo])
+Específico de SQL Server. Permite más opciones para el formato de conversión.
