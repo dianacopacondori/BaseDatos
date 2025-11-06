@@ -329,6 +329,86 @@ SELECT
     CONVERT(VARCHAR(10), OrderDate, 103) AS Fecha_Formato_DDMMYYYY
 FROM Orders;
 
+--Precio promedio por categoria
+CREATE FUNCTION fn_PrecioPromedioCategoria (@CategoryID INT)
+RETURNS MONEY
+AS
+BEGIN
+    DECLARE @Promedio MONEY;
+
+    SELECT @Promedio = AVG(UnitPrice)
+    FROM Products
+    WHERE CategoryID = @CategoryID;
+
+    RETURN @Promedio;
+END;
+GO
+
+SELECT 
+    CategoryID,
+    CategoryName,
+    dbo.fn_PrecioPromedioCategoria(CategoryID) AS PrecioPromedio
+FROM Categories;
+
+--mostrar producto por categoria
+CREATE PROCEDURE sp_ProductosPorCategoria
+    @CategoryID INT
+AS
+BEGIN
+    SELECT 
+        ProductID,
+        ProductName,
+        UnitPrice,
+        UnitsInStock
+    FROM Products
+    WHERE CategoryID = @CategoryID;
+END;
+GO
+EXEC sp_ProductosPorCategoria @CategoryID = 1;  --categoría “Beverages”.
+
+DECLARE @PrecioProducto MONEY;
+
+SELECT @PrecioProducto = UnitPrice
+FROM Products
+WHERE ProductName = 'Chai';
+
+PRINT 'El precio del producto Chai es: ' + CAST(@PrecioProducto AS VARCHAR(10));
+
+DECLARE @Stock INT;
+SELECT @Stock = UnitsInStock FROM Products WHERE ProductID = 1;
+
+IF @Stock > 50
+    PRINT 'El producto tiene suficiente stock.';
+ELSE
+    PRINT 'El producto tiene poco stock.';
+
+DECLARE @ProductID INT;
+DECLARE @UnitPrice MONEY;
+
+DECLARE cursorActualizar CURSOR FOR
+SELECT ProductID, UnitPrice
+FROM Products;
+
+OPEN cursorActualizar;
+FETCH NEXT FROM cursorActualizar INTO @ProductID, @UnitPrice;
+-- Bucle para recorrer los registros
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    IF @UnitPrice < 20
+    BEGIN
+        UPDATE Products
+        SET UnitPrice = UnitPrice * 1.10
+        WHERE ProductID = @ProductID;
+
+        PRINT 'Producto ' + CAST(@ProductID AS VARCHAR(10)) + ' actualizado (nuevo precio: ' + CAST(@UnitPrice * 1.10 AS VARCHAR(10)) + ')';
+    END
+	-- Pasar al siguiente registro
+    FETCH NEXT FROM cursorActualizar INTO @ProductID, @UnitPrice;
+END
+
+CLOSE cursorActualizar;
+DEALLOCATE cursorActualizar;
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
