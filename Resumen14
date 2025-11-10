@@ -1,0 +1,21 @@
+TRANSACCIÓN 
+Una transacción es una unidad lógica de trabajo que agrupa una o más instrucciones SQL 
+(como `INSERT`, `UPDATE`, `DELETE`) y garantiza que todas se ejecuten correctamente o 
+ninguna se aplique, manteniendo la integridad y consistencia de la base de datos.
+
+Modos de transacción
+1. Transacciones explícitas (controladas por el usuario):
+   BEGIN TRANSACTION;
+   -- Instrucciones SQL
+   COMMIT TRANSACTION;  -- Confirma
+   -- o
+   ROLLBACK TRANSACTION; -- Deshace
+   ```
+
+2. Transacciones implícitas:
+   - Activadas con `SET IMPLICIT_TRANSACTIONS ON`.
+   - Cada instrucción que modifica datos inicia una transacción 
+     nueva (requiere `COMMIT` o `ROLLBACK` explícito).
+
+3. Transacciones automáticas (por defecto):
+   - Cada instrucción SQL se ejecuta como una transacción individual (modo autocommit).
