@@ -231,21 +231,6 @@ DELETE FROM Customers
 WHERE CustomerID = 'CUST9';
 select * from Customers;
 
-CREATE FUNCTION fn_TotalVentasCliente (@CustomerID nchar(5))
-RETURNS DECIMAL(18,2)
-AS
-BEGIN
-    DECLARE @Total DECIMAL(18,2);
-
-    SELECT @Total = SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))
-    FROM [Order Details] od
-    INNER JOIN Orders o ON od.OrderID = o.OrderID
-    WHERE o.CustomerID = @CustomerID;
-
-    RETURN ISNULL(@Total, 0);
-END;
-GO
-
 
 SELECT CustomerID, dbo.fn_TotalVentasCliente(CustomerID) AS TotalVentas
 FROM Customers
