@@ -394,6 +394,27 @@ END
 CLOSE cursorActualizar;
 DEALLOCATE cursorActualizar;
 
+select * from Products;
+BEGIN TRAN;
+
+DECLARE @Stock INT;
+SELECT @Stock = UnitsInStock FROM Products WHERE ProductID = 2;
+
+IF @Stock >= 10
+BEGIN
+    UPDATE Products
+    SET UnitsInStock = UnitsInStock - 10
+    WHERE ProductID = 2;
+
+    PRINT 'Venta registrada correctamente.';
+    COMMIT TRAN;  -- Confirma los cambios
+END
+ELSE
+BEGIN
+    PRINT 'Error: Stock insuficiente.';
+    ROLLBACK TRAN;  -- Revierte los cambios
+END
+
 
 -- This script does not create a database.
 -- Run this script in the database you want the objects to be created.
