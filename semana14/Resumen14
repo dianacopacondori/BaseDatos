@@ -6,6 +6,7 @@ ninguna se aplique, manteniendo la integridad y consistencia de la base de datos
 TIPOS DE CONTROL
 COMMIT → Guarda de forma permanente los cambios.
 ROLLBACK → Revierte todos los cambios desde el BEGIN TRANSACTION.
+  Importancia:El uso de ROLLBACK es vital en situaciones donde un error podría   dejar la base de datos en un estado inconsistente.
 SAVEPOINT → Marca un punto intermedio para poder hacer ROLLBACK parcial.
 EJEMPLO SAVEPOINT
 
