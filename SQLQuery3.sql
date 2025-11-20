@@ -24,6 +24,7 @@ cargo varchar(15),
 usuario varchar(15),
 contraseña numeric (5));
 
+
 create table Cliente (
 idCliente int identity (1,1) not null PRIMARY KEY,
 nombre varchar (30),
@@ -51,6 +52,34 @@ precioUnitario money,
 subtotal money,
 CONSTRAINT FK_DetalleVenta_idVenta FOREIGN KEY (idVenta) REFERENCES Venta(idVenta),
 CONSTRAINT FK_DetalleVenta_idProducto FOREIGN KEY (idProducto) REFERENCES Productos(idProducto));
+
+--TRIGGER
+CREATE TRIGGER trg_ValidarStock
+ON DetalleVenta
+AFTER INSERT
+AS
+BEGIN
+    -- Si algún producto quedaría con stock negativo, cancelar
+    IF EXISTS (
+        SELECT 1
+        FROM Productos p
+        INNER JOIN inserted i ON p.idProducto = i.idProducto
+        WHERE p.stock - i.cantidad < 0
+    )
+    BEGIN
+        RAISERROR ('Stock insuficiente para realizar la venta.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END;
+
+    -- Si todo bien, descontamos el stock
+    UPDATE p
+    SET p.stock = p.stock - i.cantidad
+    FROM Productos p
+    INNER JOIN inserted i ON p.idProducto = i.idProducto;
+END;
+GO
+
 
 insert into Cliente values 
 ('Samuel Ramirez', 29638765, 935253886, 'Av. Los Olivos 123'),
