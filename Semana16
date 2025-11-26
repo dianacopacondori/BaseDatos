@@ -1,5 +1,8 @@
-La administración de backups es un proceso crítico en la gestión de la infraestructura de TI, cuyo objetivo
-principal es proteger la integridad, disponibilidad y confiabilidad de los datos mediante copias de seguridad periódicas y su correcta gestión. A continuación, se presenta un resumen estructurado de sus componentes clave:
+La administración de backups es un proceso crítico en la gestión de la infraestructura de TI, 
+cuyo objetivo
+principal es proteger la integridad, disponibilidad y confiabilidad de los datos mediante 
+copias de seguridad periódicas y su correcta gestión. A continuación, se presenta un resumen 
+estructurado de sus componentes clave:
 
 Objetivos Principales
 Recuperación ante desastres: Minimizar la pérdida de datos y el tiempo de inactividad.
@@ -10,12 +13,18 @@ Completo
 Copia todos los datos seleccionados.
 Recuperación rápida y simple.
 Alto consumo de espacio y tiempo.
+
+
 Incremental
 Solo copia datos modificados desde el último backup (completo o incremental).
 Menor uso de recursos.
 Recuperación más lenta (requiere cadena de backups).
+
+
 Diferencial
 Copia datos modificados desde el último backup
+
+
 completo
 Recuperación más rápida que incremental.
 Uso de espacio intermedio; crece con el tiempo.
